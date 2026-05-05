@@ -18,4 +18,3 @@ Proyek-proyek dikelompokkan ke dalam kategori berikut:
 *   **JUnit** (Testing)
 
 ---
-*Dikelola oleh Fritz Kevin Manurung*
