@@ -1,0 +1,226 @@
+// Task 3
+
+// Task 4
+
+// Task 5
+
+package pbo;
+
+/**
+* /**
+* @author
+* // 12S21014 - Fritz Kevin Manurung
+* // 12S21060 - Glory Natasya Hutahaean
+*/
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
+
+class Mahasiswa {
+    private String nim;
+    private String nama;
+    private String prodi;
+    private List<String> enrollments;
+
+    public Mahasiswa(String nim, String nama, String prodi) {
+        this.nim = nim;
+        this.nama = nama;
+        this.prodi = prodi;
+        this.enrollments = new ArrayList<>();
+    }
+
+    public String getNim() {
+        return nim;
+    }
+
+    public String getNama() {
+        return nama;
+    }
+
+    public String getProdi() {
+        return prodi;
+    }
+
+    public List<String> getEnrollments() {
+        return enrollments;
+    }
+
+    public void addEnrollment(String enrollment) {
+        enrollments.add(enrollment);
+    }
+}
+
+class MataKuliah {
+    private String kode;
+    private String nama;
+    private int semester;
+    private int kredit;
+
+    public MataKuliah(String kode, String nama, int semester, int kredit) {
+        this.kode = kode;
+        this.nama = nama;
+        this.semester = semester;
+        this.kredit = kredit;
+    }
+
+    public String getKode() {
+        return kode;
+    }
+
+    public String getNama() {
+        return nama;
+    }
+
+    public int getSemester() {
+        return semester;
+    }
+
+    public int getKredit() {
+        return kredit;
+    }
+}
+
+public class App {
+    private static List<Mahasiswa> basisDataMahasiswa = new ArrayList<>();
+    private static List<MataKuliah> basisDataMataKuliah = new ArrayList<>();
+    private static Map<String, String> enrollments = new HashMap<>();
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        String perintah = scanner.nextLine();
+        while (!perintah.equals("---")) {
+            if (perintah.startsWith("student-add")) {
+                tambahDataMahasiswa(perintah);
+            } else if (perintah.startsWith("course-add")) {
+                tambahDataMataKuliah(perintah);
+            } else if (perintah.startsWith("enroll")) {
+                enrollMahasiswa(perintah);
+            } else if (perintah.startsWith("student-detail")) {
+                tampilkanDetailMahasiswa(perintah);
+            } else if (perintah.equals("student-show-all")) {
+                tampilkanDataMahasiswa();
+            } else if (perintah.equals("course-show-all")) {
+                tampilkanDataMataKuliah();
+            }
+
+            perintah = scanner.nextLine();
+        }
+    }
+
+    private static void tambahDataMahasiswa(String perintah) {
+        String[] dataMahasiswa = perintah.split("#");
+        if (dataMahasiswa.length == 4) {
+            String nim = dataMahasiswa[1];
+            String nama = dataMahasiswa[2];
+            String prodi = dataMahasiswa[3];
+
+            Mahasiswa mahasiswa = new Mahasiswa(nim, nama, prodi);
+            basisDataMahasiswa.add(mahasiswa);
+        }
+    }
+
+    private static void tambahDataMataKuliah(String perintah) {
+        String[] dataMataKuliah = perintah.split("#");
+        if (dataMataKuliah.length == 5) {
+            String kode = dataMataKuliah[1];
+            String nama = dataMataKuliah[2];
+            int semester = Integer.parseInt(dataMataKuliah[3]);
+            int kredit = Integer.parseInt(dataMataKuliah[4]);
+
+            MataKuliah mataKuliah = new MataKuliah(kode, nama, semester, kredit);
+            basisDataMataKuliah.add(mataKuliah);
+        }
+    }
+
+    private static void enrollMahasiswa(String perintah) {
+        String[] dataEnrollment = perintah.split("#");
+        if (dataEnrollment.length == 3) {
+            String nim = dataEnrollment[1];
+            String kodeMataKuliah = dataEnrollment[2];
+            String enrollment = nim + "|" + kodeMataKuliah;
+
+            Mahasiswa mahasiswa = cariMahasiswa(nim);
+            MataKuliah mataKuliah = cariMataKuliah(kodeMataKuliah);
+
+            if (mahasiswa != null && mataKuliah != null) {
+                if (!enrollments.containsKey(enrollment)) {
+                    mahasiswa.addEnrollment(enrollment);
+                    enrollments.put(enrollment, mahasiswa.getNama() + "|" + mataKuliah.getNama());
+                } 
+            }
+        }
+    }
+
+    private static void tampilkanDetailMahasiswa(String perintah) {
+        String[] dataDetail = perintah.split("#");
+        if (dataDetail.length == 2) {
+            String nim = dataDetail[1];
+
+            Mahasiswa mahasiswa = cariMahasiswa(nim);
+            if (mahasiswa != null) {
+                System.out.println(mahasiswa.getNim() + "|" + mahasiswa.getNama() + "|" + mahasiswa.getProdi());
+
+                List<String> enrollments = mahasiswa.getEnrollments();
+                Collections.sort(enrollments);
+
+                for (String enrollment : enrollments) {
+                    String[] dataEnrollment = enrollment.split("\\|");
+                    String kodeMataKuliah = dataEnrollment[1];
+                    String namaMataKuliah = App.enrollments.get(enrollment);
+                    System.out.println(kodeMataKuliah + "|" + namaMataKuliah);
+                }
+
+        }
+    }
+
+    private static Mahasiswa cariMahasiswa(String nim) {
+        for (Mahasiswa mahasiswa : basisDataMahasiswa) {
+            if (mahasiswa.getNim().equals(nim)) {
+                return mahasiswa;
+            }
+        }
+        return null;
+    }
+
+    private static MataKuliah cariMataKuliah(String kodeMataKuliah) {
+        for (MataKuliah mataKuliah : basisDataMataKuliah) {
+            if (mataKuliah.getKode().equals(kodeMataKuliah)) {
+                return mataKuliah;
+            }
+        }
+        return null;
+    }
+
+    private static void tampilkanDataMahasiswa() {
+        Collections.sort(basisDataMahasiswa, (m1, m2) -> m1.getNim().compareTo(m2.getNim()));
+
+        for (Mahasiswa mahasiswa : basisDataMahasiswa) {
+            System.out.println(mahasiswa.getNim() + "|" + mahasiswa.getNama() + "|" + mahasiswa.getProdi());
+        }
+    }
+
+    private static void tampilkanDataMataKuliah() {
+        Collections.sort(basisDataMataKuliah, (m1, m2) -> {
+            if (m1.getSemester() == m2.getSemester()) {
+                return m1.getKode().compareTo(m2.getKode());
+            } else {
+                return Integer.compare(m1.getSemester(), m2.getSemester());
+            }
+        });
+
+        for (MataKuliah mataKuliah : basisDataMataKuliah) {
+            System.out.println(
+                    mataKuliah.getKode() + "|" +
+                            mataKuliah.getNama() + "|" +
+                            mataKuliah.getSemester() + "|" +
+                            mataKuliah.getKredit()
+            );
+        }
+    }
+}
+
