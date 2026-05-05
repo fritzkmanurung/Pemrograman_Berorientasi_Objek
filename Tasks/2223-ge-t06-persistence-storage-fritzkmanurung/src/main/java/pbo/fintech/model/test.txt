@@ -1,0 +1,137 @@
+input: 
+create-account#Wiro Sableng#wirsab
+create-account#Jaka Sembung#jaksem
+show-accounts
+create-account#Jaka Sembung#jaksem
+show-accounts
+create-account#Jaka Sembung#jasemb
+show-accounts
+---
+,
+output: 
+wirsab|Wiro Sableng|0.0
+jaksem|Jaka Sembung|0.0
+jaksem|Jaka Sembung|0.0
+wirsab|Wiro Sableng|0.0
+jaksem|Jaka Sembung|0.0
+wirsab|Wiro Sableng|0.0
+jasemb|Jaka Sembung|0.0
+jaksem|Jaka Sembung|0.0
+jasemb|Jaka Sembung|0.0
+wirsab|Wiro Sableng|0.0
+,
+
+
+create-account#Wiro Sableng#wirsab
+create-account#Jaka Sembung#jasemb
+create-account#Jaka Sembung#jaksem
+show-accounts
+remove-account#jasemb
+show-accounts
+---
+
+```
+
+Berikut adalah contoh keluaran yang dihasilkan.
+
+```bash
+wirsab|Wiro Sableng|0.0
+jasemb|Jaka Sembung|0.0
+jaksem|Jaka Sembung|0.0
+jaksem|Jaka Sembung|0.0
+jasemb|Jaka Sembung|0.0
+wirsab|Wiro Sableng|0.0
+jaksem|Jaka Sembung|0.0
+wirsab|Wiro Sableng|0.0
+
+```
+
+::stop-commands::***
+
+📝 t06&#45;01&#45;01
+
+
+  mvn -q clean compile assembly:single
+  
+  wirsab|Wiro Sableng|0.0
+  jaksem|Jaka Sembung|0.0
+  jaksem|Jaka Sembung|0.0
+  wirsab|Wiro Sableng|0.0
+  jaksem|Jaka Sembung|0.0
+  wirsab|Wiro Sableng|0.0
+  jasemb|Jaka Sembung|0.0
+  jaksem|Jaka Sembung|0.0
+  jasemb|Jaka Sembung|0.0
+  wirsab|Wiro Sableng|0.0
+  
+✅ t06&#45;01&#45;01
+
+📝 t06&#45;01&#45;02
+
+
+  mvn -q clean compile assembly:single
+  
+  wirsab|Wiro Sableng|0.0
+  jasemb|Jaka Sembung|0.0
+  jaksem|Jaka Sembung|0.0
+  jasemb|Jaka Sembung|0.0
+  jaksem|Jaka Sembung|0.0
+  wirsab|Wiro Sableng|0.0
+  milkyn|Milkyman|0.0
+  jasemb|Jaka Sembung|0.0
+  jaksem|Jaka Sembung|0.0
+  milkyn|Milkyman|0.0
+  wirsab|Wiro Sableng|0.0
+  
+❌ t06&#45;01&#45;02
+::error::The output for test t06&#45;01&#45;02 did not match%0AExpected:%0Awirsab|Wiro Sableng|0.0%0Ajasemb|Jaka Sembung|0.0%0Ajaksem|Jaka Sembung|0.0%0Ajaksem|Jaka Sembung|0.0%0Ajasemb|Jaka Sembung|0.0%0Awirsab|Wiro Sableng|0.0%0Amilkyn|Milkyman|0.0%0Ajaksem|Jaka Sembung|0.0%0Ajasemb|Jaka Sembung|0.0%0Amilkyn|Milkyman|0.0%0Awirsab|Wiro Sableng|0.0%0AActual:%0Awirsab|Wiro Sableng|0.0%0Ajasemb|Jaka Sembung|0.0%0Ajaksem|Jaka Sembung|0.0%0Ajasemb|Jaka Sembung|0.0%0Ajaksem|Jaka Sembung|0.0%0Awirsab|Wiro Sableng|0.0%0Amilkyn|Milkyman|0.0%0Ajasemb|Jaka Sembung|0.0%0Ajaksem|Jaka Sembung|0.0%0Amilkyn|Milkyman|0.0%0Awirsab|Wiro Sableng|0.0
+📝 t06&#45;01&#45;03
+
+
+  mvn -q clean compile assembly:single
+  
+  wirsab|Wiro Sableng|0.0
+  jasemb|Jaka Sembung|0.0
+  jaksem|Jaka Sembung|0.0
+  jasemb|Jaka Sembung|0.0
+  jaksem|Jaka Sembung|0.0
+  wirsab|Wiro Sableng|0.0
+  jasemb|Jaka Sembung|0.0
+  jaksem|Jaka Sembung|0.0
+  wirsab|Wiro Sableng|0.0
+  
+❌ t06&#45;01&#45;03
+::error::The output for test t06&#45;01&#45;03 did not match%0AExpected:%0Awirsab|Wiro Sableng|0.0%0Ajasemb|Jaka Sembung|0.0%0Ajaksem|Jaka Sembung|0.0%0Ajaksem|Jaka Sembung|0.0%0Ajasemb|Jaka Sembung|0.0%0Awirsab|Wiro Sableng|0.0%0Ajaksem|Jaka Sembung|0.0%0Awirsab|Wiro Sableng|0.0%0AActual:%0Awirsab|Wiro Sableng|0.0%0Ajasemb|Jaka Sembung|0.0%0Ajaksem|Jaka Sembung|0.0%0Ajasemb|Jaka Sembung|0.0%0Ajaksem|Jaka Sembung|0.0%0Awirsab|Wiro Sableng|0.0%0Ajasemb|Jaka Sembung|0.0%0Ajaksem|Jaka Sembung|0.0%0Awirsab|Wiro Sableng|0.0
+📝 t06&#45;01&#45;04
+
+
+  mvn -q clean compile assembly:single
+  
+  wirsab|Wiro Sableng|0.0
+  jasemb|Jaka Sembung|0.0
+  jaksem|Jaka Sembung|0.0
+  jasemb|Jaka Sembung|0.0
+  jaksem|Jaka Sembung|0.0
+  wirsab|Wiro Sableng|0.0
+  milkyn|Milkyman|0.0
+  jasemb|Jaka Sembung|0.0
+  jaksem|Jaka Sembung|0.0
+  milkyn|Milkyman|0.0
+  wirsab|Wiro Sableng|0.0
+  
+❌ t06&#45;01&#45;04
+::error::The output for test t06&#45;01&#45;04 did not match%0AExpected:%0Awirsab|Wiro Sableng|0.0%0Ajasemb|Jaka Sembung|0.0%0Ajaksem|Jaka Sembung|0.0%0Ajaksem|Jaka Sembung|0.0%0Ajasemb|Jaka Sembung|0.0%0Awirsab|Wiro Sableng|0.0%0Amilkyn|Milkyman|0.0%0Ajaksem|Jaka Sembung|0.0%0Ajasemb|Jaka Sembung|0.0%0Awirsab|Wiro Sableng|0.0%0AActual:%0Awirsab|Wiro Sableng|0.0%0Ajasemb|Jaka Sembung|0.0%0Ajaksem|Jaka Sembung|0.0%0Ajasemb|Jaka Sembung|0.0%0Ajaksem|Jaka Sembung|0.0%0Awirsab|Wiro Sableng|0.0%0Amilkyn|Milkyman|0.0%0Ajasemb|Jaka Sembung|0.0%0Ajaksem|Jaka Sembung|0.0%0Amilkyn|Milkyman|0.0%0Awirsab|Wiro Sableng|0.0
+
+
+
+[EL Warning]: 2023-05-17 14:12:14.9--UnitOfWork(251520863)--Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.7.10.v20211216-fe64cd39c3): org.eclipse.persistence.exceptions.DatabaseException
+Internal Exception: org.h2.jdbc.JdbcSQLIntegrityConstraintViolationException: Unique index or primary key violation: "PUBLIC.PRIMARY_KEY_E ON PUBLIC.ACCOUNT(NAME) VALUES ( /* 2 */ 'jaksem' )"; SQL statement:
+INSERT INTO Account (name, balance, owner) VALUES (?, ?, ?) [23505-212]
+Error Code: 23505
+Call: INSERT INTO Account (name, balance, owner) VALUES (?, ?, ?)
+        bind => [3 parameters bound]
+Query: InsertObjectQuery(Jaka Sembung|jaksem|0.0)
+Exception in thread "main" java.lang.IllegalStateException: 
+Exception Description: No transaction is currently active
+        at org.eclipse.persistence.internal.jpa.transaction.EntityTransactionImpl.rollback(EntityTransactionImpl.java:180)
+        at pbo.fintech.App.main(App.java:73)
