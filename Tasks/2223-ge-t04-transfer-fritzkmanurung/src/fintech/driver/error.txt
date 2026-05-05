@@ -1,0 +1,16 @@
+tmp = findAccount(data[0]);
+            
+                if (tmp != null) {
+                    double amount = Double.parseDouble(data[1]);
+                    double newBalance = tmp.getBalance() + amount;
+            
+                    if (newBalance >= 0) {
+                        Transaction transaction = new Transaction(tmp, amount, data[2], data[3]);
+                        tmp.addTransaction(transaction);
+                    }
+                }
+
+
+
+Exception in thread "main" java.lang.NullPointerException: Cannot invoke "java.util.ArrayList.size()" because "transactions" is null
+        at fintech.driver.Driver1.main(Driver1.java:86)
